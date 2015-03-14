@@ -10,17 +10,18 @@ ConstQ constQ;
 float [] audio;
 int sampRate;
 void setup() {
-  String loadPath = selectInput("Select audio file (.wav, .aiff, .mp3) ...");
-  if (loadPath == null) {
+    size(1024,700); 
+    smooth(); 
+    selectInput("Select audio file (.wav, .aiff, .mp3) ...", "fileSelected");
+}
+  
+void fileSelected(File selection) {
+  if (selection == null) {
     println("No file was selected...");
     stop();
-  }
-  else{
-    size(1024,700); 
-    smooth();
-
-    Ess.start(this);
-    myChannel=new AudioChannel(loadPath);
+  } else {
+     Ess.start(this);
+    myChannel=new AudioChannel(selection.getAbsolutePath());
     audio = new float [myChannel.samples.length];
     arrayCopy(myChannel.samples, audio);
     sampRate = floor(myChannel.sampleRate);
@@ -29,8 +30,10 @@ void setup() {
     background(0);
     
    image(constQ.processAndDraw(audio),0,0);
+    println("User selected " + selection.getAbsolutePath());
   }
 }
+
 void draw(){
 
 }

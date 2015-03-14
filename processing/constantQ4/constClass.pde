@@ -142,7 +142,7 @@ class ConstQ {
   Feel free to modify this part.
   */
   PImage processAndDraw(float[] a){
-    PGraphics pg = createGraphics(width, height,P3D);
+    PGraphics pg = createGraphics(width, height);//,P3D);
     float factorH= height/float(K);
     //int cuantos = floor(a.length/float(fftLen));
     int cuantos =width-1;
